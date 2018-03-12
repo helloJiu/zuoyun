@@ -1,0 +1,147 @@
+<template name="tmpl_account_tx_list">
+<view class='top_main'>
+<view class='view_pay_main' >
+<view class='view_pay_money'>
+<text>帐户提现</text>
+<view class="t_gray font12">{{item.paycrtime}}</view>
+</view>
+
+<view class='view_pay_money 'style='flex:2;'>
+<view style='text-align:right;'>实际到帐<text style='color:green;font-size:24rpx;'>￥{{item.money_sj}}元</text></view>
+<view style='text-align:right;'>手续费<text style='color:red;font-size:24rpx;'>￥{{item.money_sxf}}元</text></view>
+
+</view>
+
+
+<view class='view_pay_money' style="justify-content:flex-end;text-align:right;padding-right:20rpx;">
+<view><text class="t_red">-</text><text>{{item.money}}元</text></view>
+</view>
+
+</view>
+<view class='ot_main' style='padding-left:10rpx;font-size:24rpx;'>
+
+<view class='flex_view'>
+<text style='flex:1;text-align:left;font-size:24rpx;'>
+  <text>提现类型:</text>
+  <text wx:if="{{item.enable==1}}" style='color:green;'>自动提现</text>
+  <text wx:elif="{{item.enable==0}}" style='color:blue;'>审核提现</text>
+  <text wx:elif="{{item.enable==-1}}" style='color:red;'>自动提现失败</text>
+
+</text>
+
+<text style='flex:1;text-align:center;font-size:24rpx;' wx:if="{{item.status_tx}}">
+<text>提现状态:</text>
+<text wx:if="{{item.status_tx==1}}" style='color:green;'>提现成功</text>
+<text wx:elif="{{item.status_tx==0}}" style='color:red;'>提现失败,待手动审核</text>
+</text>
+
+</view>
+</view>
+<view class='ot_main' style='padding-left:10rpx;font-size:24rpx;' wx:if="{{item.rmk_tx}}">
+<text>提现反馈:{{item.rmk_tx}}</text>
+</view>
+
+
+</view>
+</template>
+
+
+<!-- 没有更多 -->
+<template name="lastdata">
+<view style="border-top:1px solid #b3b3b3;margin-top:60rpx;text-align:center;width:520rpx;margin-left:auto;margin-right:auto;">
+ <text style='color:#b3b3b3;font-size:32rpx;padding:10rpx;background:#e6e1e1;position:relative;bottom:30rpx;'>没有更多了</text>
+ </view>
+</template>
+
+
+<template name="tmpl_order_list">
+
+<view class='view_pay_main' bindtap='tap_sheet' data-dtid='{{item.dt_id}}'>
+<view class='view_pay_money'>
+
+<text wx:if="{{item.pay_channel=='wx'}}" >微信支付</text>
+<text wx:elif="{{item.pay_channel=='account'}}">帐户支付</text>
+<text wx:elif="{{item.pay_channel=='integral'}}">积分支付</text>
+<text wx:elif="{{item.pay_channel=='back_pay'}}">后台充值</text>
+
+<view class="t_gray font12">{{item.paycrtime}}</view>
+
+</view>
+
+
+
+<view class='view_pay_money 'style='flex:2;'>
+<view wx:if="{{item.ordertype=='msg'}}" class="order_title">置顶或付费消息</view>
+<view wx:elif="{{item.ordertype=='msg_refresh_crtime'}}" class="order_title">刷新消息日期</view>
+<view wx:elif="{{item.ordertype=='banner'}}" class="order_title">幻灯广告位</view>
+<view wx:elif="{{item.ordertype=='pay'}}" class="order_title">帐户充值</view>
+<view wx:elif="{{item.ordertype=='back_pay'}}" class="order_title">后台充值</view>
+<view wx:elif="{{item.ordertype=='shang'}}" class="order_title">
+
+<!-- 打赏全额 -->
+<text wx:if="{{item.shang_type=='to'}}">{{item.orderrmk}}</text>
+<!-- 被打赏收入 -->
+<text wx:if="{{item.shang_type=='go'}}">{{item.u_name}}给你打赏 </text>
+
+</view>
+
+
+
+
+</view>
+
+
+<view class='view_pay_money' style="justify-content:flex-end;text-align:right;padding-right:20rpx;">
+
+<text wx:if="{{item.ordertype=='msg'}}" class="t_red">-</text>
+<text wx:elif="{{item.ordertype=='banner'}}" class="t_red">-</text>
+<text wx:elif="{{item.ordertype=='shang'}}" >
+<text wx:if="{{item.shang_type=='to'}}" class="t_red">-</text>
+<text wx:if="{{item.shang_type=='go'}}" class="t_green">+</text>
+
+</text>
+<text wx:elif="{{item.ordertype=='pay'}}" class="t_green">+</text>
+<text wx:elif="{{item.ordertype=='back_pay'}}" class="t_red">+</text>
+<text wx:elif="{{item.ordertype=='msg_refresh_crtime'}}" class="t_red">-</text>
+
+<!-- <block wx:if="{{item.search_openid==item.openid_y && item.ordertype=='shang'}}">A</block>
+<block wx:else></block> -->
+<text wx:if="{{item.ordertype=='back_pay'}}">
+<text wx:if="{{item.total_money!=0}}">{{item.total_money}}元</text>
+<text wx:if="{{item.system_money!=0}}">,{{item.system_money}}积分</text>
+
+
+</text>
+<text wx:else>
+<text wx:if="{{item.pay_channel=='integral'}}" class="order_title">{{item.total_money}}积分</text>
+<text wx:else class="order_title">
+
+<text wx:if="{{item.ordertype!='shang'}}">{{item.total_money}}元</text>
+<!-- 打赏全额 -->
+<text wx:if="{{item.shang_type=='to'}}">{{item.total_money}}元</text>
+<!-- 被打赏收入 -->
+<text wx:if="{{item.shang_type=='go'}}">{{item.user_money}}元</text>
+
+
+
+
+</text>
+
+
+
+
+
+</text>
+</view>
+
+
+
+</view>
+
+
+
+
+
+
+</template>
+

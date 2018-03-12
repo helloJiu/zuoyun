@@ -1,0 +1,164 @@
+<view class="user_top">
+
+  <!-- <icon class="dsf_ddsf f_i {{xiaosh}}" /> -->
+  
+  <view class="view_top_left" bindtap='tap_scanner' wx:if="{{store}}">  
+  <image src="../../resource/images/static/scanner.png" mode="widthFix"/>
+  </view>
+ 
+ 
+  
+  <view class="user_sd_sfg" wx:if="{{ubinfo.avatarUrl}}">
+    <image src="{{ubinfo.avatarUrl}}" class="cz"></image>   
+  </view>
+  <view class="user_sd_sfg cf">
+    <view class="fz35">{{ubinfo.nickName}}</view>   
+  </view>
+
+   <navigator url="../wallet/page" open-type="navigate" hover-class="none">
+   <view class="user_sd_sfg2 cf">
+    <view class="fz28">
+    <view wx:if="{{copyright.account_isopen=='1'}}">帐户:{{account}}元 
+    
+    </view>
+    <view wx:if="{{copyright.integral_isopen=='1'}}">积分:{{integral}}</view>  
+    </view>
+  </view>
+   </navigator>
+ 
+</view>
+
+ <!-- xiaosh为空的话就没一点  -->
+<!-- <view class="user_top pd pr">
+ 
+  <icon class="dsf_ddsf f_i {{xiaosh}}" />
+  <view class="fl user_sd_sfg pr">
+    <image src="/img/touxiang.png" class=" cz"></image>
+  </view>
+  <view class="ov pl40 cf">
+    <view class="fz40 mt50">独行工匠</view>
+    <view class="">
+      <icon class="f_i dsf_sd_sfgx cz" />
+      <text class="fz26 ml5">13538190372</text>
+    </view>
+  </view>
+</view>
+<view class="bgff box cen">
+  <navigator url="{{item.url}}" class="box_a pm20" wx:for="{{sd_sd_ds}}">
+    <view class="dsf_dffg">
+      <icon class="f_i dfdsf_dfg cz {{item.img}}" />
+    </view>
+    <view class="fz28 z3">
+      {{item.name}}
+    </view>
+  </navigator>
+  <view class="qc"></view>
+</view> -->
+
+
+<!-- style='background:#FF5A00;color:#ffffff;' -->
+
+<view class="container">
+
+
+
+<!-- <view class='view_user width100 bg_white mg_bottom20 mg_top20' >
+<view class='flex1 flex_box'>
+
+<view class="user_logo" wx:if="{{ubinfo.avatarUrl}}">
+<image src="{{ubinfo.avatarUrl}}"/>
+</view>
+<view class="user_nickname">{{ubinfo.nickName}}</view>
+</view>
+
+<view class='flex2' wx:if="{{ copyright.account_isopen=='1' || copyright.integral_isopen=='1' || copyright.pay_isopen=='1'}}">
+<view class="view_r {{copyright.integral_isopen!='1'?'view_end':''}}">
+<text wx:if="{{copyright.account_isopen=='1'}}">账户:<text class='money_text'>{{account}}</text>元</text>
+<text wx:if="{{copyright.integral_isopen=='1'}}">积分:<text class='jf_text'>{{integral}}</text></text>
+
+</view>
+<view class="view_r {{copyright.integral_isopen!='1'?'view_end':''}}" wx:if="{{copyright.pay_isopen=='1'}}">
+ <view wx:if="{{copyright.integral_isopen=='1'}}"></view>
+<button type="default" type="primary" size="default" bindtap="tap_pay_taocan"> 帐户充值 </button>
+</view>
+</view>
+</view> -->
+
+<!-- <view class="tip_text mg_bottom20 mg_top20" wx:if="{{hidden_tip_text=='1'}}">提示:帐户，积分可用于支付置顶、幻灯广告位出租，用于刷新消息</view> -->
+
+<!-- 
+<view class="user_edit">
+ <image src="../../resource/images/static/edit.png"/>
+<text bindtap="myuser_info">编辑</text> 
+
+<image src="../../resource/images/static/refresh.png"/>
+<text bindtap="refresh_myuser_info">获取用户信息</text>
+</view> -->
+<view class="item_m">
+<view class="item_m_v righticon_gray" bindtap="wallet_send"><image src="../../resource/images/static/wallet.png" mode="widthFix"/>钱包</view>
+</view>
+
+<view class="item_m" wx:if="{{copyright.pay_isopen=='1'}}">
+<view class="item_m_v righticon_gray" bindtap="tap_pay_taocan"><image src="../../resource/images/static/chongzhi.png" mode="widthFix"/>帐户充值</view>
+</view>
+
+
+<view class="item_m mt8">
+<view class="item_m_v righticon_gray" bindtap="myuser_send"><image src="../../resource/images/static/my_send.png" mode="widthFix"/>我发布的</view>
+</view>
+
+
+
+<view class="item_m mt8">
+<view class="item_m_v righticon_gray" bindtap="banner_send"><image src="../../resource/images/static/hezuo.png" mode="widthFix"/>{{copyright.banner_sale_title}}</view>
+</view>
+
+
+<view class="item_m mt8" wx:if="{{store}}">
+<view class="item_m_v righticon_gray" bindtap="order_main"><image src="../../resource/images/menu/store_ok.png" mode="widthFix"/>店铺管理</view>
+</view>
+ 
+<view class="item_m" wx:if="{{store}}">
+<view class="item_m_v righticon_gray" bindtap="order_list"><image src="../../resource/images/static/order_list.png" mode="widthFix"/>店铺订单</view>
+</view>
+
+
+<view class="item_m" wx:if="{{pinche}}">
+<view class="item_m_v righticon_gray" bindtap="order_list"><image src="../../resource/images/menu/car-ok.png" mode="widthFix"/>拼车发布</view>
+</view>
+
+
+<view class="item_m mt8">
+<view class="item_m_v righticon_gray" bindtap="myuser_info"><image src="../../resource/images/static/userinfo.png" mode="widthFix"/>用户信息</view>
+</view>
+
+<view class="item_m mt8" wx:if="{{copyright.kefu_isopen=='1'}}">
+<view class="item_m_v righticon_gray" style='padding:8rpx 24rpx;'><image src="../../resource/images/static/kefu.png" style='margin-right:5rpx;' mode="widthFix"/>
+<button open-type="contact" plain="false" type="default" class='kefuweapp'>联系客服</button>
+</view>
+</view>
+
+
+<!-- <contact-button type="default-light" size="20" session-from="weapp">联系客服</contact-button> -->
+
+
+<!-- <view class="item_m">
+<view class="item_m_v " bindtap="refresh_myuser_info"><image src="../../resource/images/static/refresh.png"/>刷新用户缓存信息</view>
+</view> -->
+
+
+
+<view class="item_n" wx:if="{{copyright.copy_right_title}}">
+<view class="item_m_v">{{copyright.copy_right_title}}</view>
+<view class="item_m_v">{{copyright.copy_right_phone}}</view>
+</view>
+
+
+
+</view>
+
+
+
+<!-- <import src="../../resource/templates/myfooter.wxml"/>
+<template is="myfooterWx" data="{{...tabBar}}"/>
+ -->

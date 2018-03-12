@@ -1,0 +1,170 @@
+<template name="lastdata">
+  <view style="border-top:1px solid #b3b3b3;margin-top:60rpx;text-align:center;width:520rpx;margin-left:auto;margin-right:auto;">
+    <text style='color:#b3b3b3;font-size:32rpx;padding:10rpx;background:#e6e1e1;position:relative;bottom:30rpx;'>
+      没有更多了
+    </text>
+  </view>
+</template>
+<!-- <image src="../../resource/images/test/menu_2.png"/></view>-->
+<template name="msg_template">
+  <!--消息开始-->
+  <view class="msg_container">
+    <view class="msg_conent">
+
+      <view class="msg_newtop">
+        <view class="msg_user" bindtap="tapbyuserlist" data-openid="{{item.user.openid}}"
+              data-nkname="{{item.user.nickname}}">
+          <image src="{{item.user.img.url}}"/>
+        </view>
+        <view style='flex:1'>
+          <view class="msg_conent_name" bindtap="nav_msg_info" data-mid="{{item.id}}">{{item.u.nickname}}
+          </view>
+          <view>
+
+            <view class="msg_conent_tag">
+              <!--<text wx:if="{{item.is_placed_top=='1'}}" class="msg_conent_tag_top">顶</text>-->
+
+              <!-- <block wx:if="{{item.indexlxta_isopen=='1'}}">
+              <text wx:if="{{item.u_phone}}" class="msg_conent_tag_base_lx" bindtap="tap_lianxita" data-uphone="{{item.u_phone}}">联系Ta</text>
+              </block> -->
+
+
+              <text class="msg_conent_tag_base" bindtap="tap_open_mlist" data-menu_id='{{item.menu_id}}'
+                    data-menu_name='{{item.menu.menu_name}}'>
+                {{item.menu_name}}
+              </text>
+
+
+            </view>
+
+          </view>
+        </view>
+
+
+        <view style='text-align:right;float:right;with:200rpx;position:absolute;right:10rpx;top:10rpx;'>
+
+          <view class='list_phone' wx:if="{{item.phone}}" bindtap="tap_lianxita"
+                data-phone="{{item.user_phone}}">
+            <image src="../../resource/images/static/phone_2.png"/>
+            <text>拨打电话</text>
+          </view>
+
+        </view>
+
+
+      </view>
+
+      <!--正文展示-->
+      <view class="msg_conent_text hiddentext2" bindtap="nav_msg_info" data-msg_id="{{item.msg_id}}">{{item.content}}
+      </view>
+
+      <view class="msg_conent_img">
+        <!--图片集合展示-->
+        <block wx:for="{{item.imgs}}" wx:key="unique" wx:for-item="itemimg">
+          <view wx:if="{{itemimg!=''}}" class="msg_icon">
+            <image src="{{itemimg}}" data-img="{{itemimg}}" data-imgs="{{item.imgs}}"
+                   bindtap="previewImage"/>
+          </view>
+        </block>
+        <!--图片集合展示 结束-->
+      </view>
+
+      <view class="msg_conent_gps" bindtap="open_map" data-lat="{{item.loc_lat}}" data-lon="{{item.loc_lon}}">
+        <image src="../../resource/images/static/menu_6.png"/>
+        {{item.loc_address}} {{item.loc_juli}}
+      </view>
+
+      <!--底部信息-->
+      <view class="msg_content_top nopadding" style='margin-top:20rpx;'>
+        <view class="msg_conent_time">{{item.created_at}}</view>
+
+        <view class="msg_conent_tag_bottom" bindtap="nav_msg_info" data-msg_id="{{item.msg_id}}">查看详情>></view>
+      </view>
+
+
+      <view class="msg_content_top nopadding" style='margin-top:10rpx;background:#f8f8f8;position: relative'>
+        <image src="../../resource/images/static/view_tag.png" class='view_tag'/>
+
+        <!-- <view class="msg_conent_time">{{item.crtime}}</view> -->
+
+        <view class="msg_conent_tag_bottom">
+
+
+          <!-- 阅读量 -->
+          <!--<view wx:if="{{item.lookcnt_isopen==1}}" class="msg_conent_tag_bottom_icon">-->
+            <!--<image src="../../resource/images/static/look.png"/>-->
+            <!--<text class="msg_conent_tag_default">{{item.look_cnt}}</text>-->
+          <!--</view>-->
+
+          <!-- 点赞量 -->
+          <!--<view wx:if="{{item.goods_isopen=='1'}}" class="msg_conent_tag_bottom_icon" bindtap="ck_goods"-->
+                <!--data-mid="{{item.id}}" data-idx="{{idx}}">-->
+            <!--<block wx:if="{{item.isgoods=='1'}}">-->
+              <!--<image src="../../resource/images/static/like_ok.png"/>-->
+            <!--</block>-->
+            <!--<block wx:else>-->
+              <!--<image src="../../resource/images/static/like_default.png"/>-->
+            <!--</block>-->
+            <!--<text class="msg_conent_tag_default">{{item.goods_cnt}}</text>-->
+          <!--</view>-->
+          <!-- 评论量 -->
+          <!--<view wx:if="{{item.scomments_isopen=='1'}}" class="msg_conent_tag_bottom_icon"-->
+                <!--bindtap="show_comments" data-idx="{{idx}}" data-mid="{{item.id}}"-->
+                <!--data-plname="{{item.u_nickname}}" data-attr="0" data-ctype="main">-->
+            <!--<image src="../../resource/images/static/comments.png"/>-->
+            <!--<text class="msg_conent_tag_default">{{item.comments_cnt}}</text>-->
+          <!--</view>-->
+
+          <!-- 打赏 -->
+          <!--<view wx:if="{{item.shang_isopen==1}}" class="msg_conent_tag_bottom_icon" bindtap="open_shang_win"-->
+                <!--data-mid="{{item.id}}" data-idx="{{idx}}">-->
+            <!--<image src="../../resource/images/static/shang.png"/>-->
+            <!--<text class="msg_conent_tag_default">{{item.shang_cnt}}</text>-->
+          <!--</view>-->
+
+
+        </view>
+      </view>
+
+
+      <!--底部信息结束-->
+      <!--评论开始-->
+
+      <!--<view class="cmmts" style='margin-top:10rpx;'>-->
+
+        <!--&lt;!&ndash;主&ndash;&gt;-->
+        <!--<view wx:for="{{item.comments}}" wx:for-item="ctmain" wx:key="id" class="cmt_main">-->
+          <!--<text class="plname" data-idx="{{idx}}" data-mid="{{item.id}}" data-plname="{{ctmain.u_nickname}}"-->
+                <!--data-attr="{{ctmain.id}}" data-attrtp="u" data-ctype="ptmain" data-plid="{{ctmain.id}}"-->
+                <!--bindtap="show_comments">{{ctmain.u_nickname}}-->
+          <!--</text>-->
+          <!--<text class="ptext">:{{ctmain.mcontent}}</text>-->
+          <!--&lt;!&ndash;子信息pt_comments&ndash;&gt;-->
+          <!--<view wx:for="{{ctmain.pt_comments}}" wx:for-item="ptmain" wx:key="id" class="cmt_parmain">-->
+            <!--<text class="plhf plname" data-idx="{{idx}}" data-mid="{{item.id}}"-->
+                  <!--data-plname="{{ptmain.u_nickname}}" data-attr="{{ctmain.id}}" data-attrtp="u"-->
+                  <!--data-plid="{{ptmain.id}}" data-ctype="ptmain" bindtap="show_comments">-->
+              <!--{{ptmain.u_nickname}}:-->
+            <!--</text>-->
+            <!--<text>回复:</text>-->
+            <!--<text class="plname" data-idx="{{idx}}" data-mid="{{item.id}}"-->
+                  <!--data-plname="{{ptmain.rp_nickname}}" data-attr="{{ctmain.id}}" data-attrtp="rp"-->
+                  <!--data-plid="{{ptmain.id}}" data-ctype="ptmain" bindtap="show_comments">-->
+              <!--{{ptmain.rp_nickname}}-->
+            <!--</text>-->
+            <!--<text class="ptext">:{{ptmain.mcontent}}</text>-->
+          <!--</view>-->
+
+        <!--</view>-->
+        <!--&lt;!&ndash;子信息&ndash;&gt;-->
+        <!--&lt;!&ndash;主&ndash;&gt;-->
+
+      <!--</view>-->
+      <!--评论结束-->
+
+
+    </view>
+  </view>
+  <!--消息结束-->
+
+</template>

@@ -1,0 +1,266 @@
+<import src="../../resource/templates/msg_temp.wxml"/>
+<import src="../../resource/templates/bannser_temp.wxml"/>
+
+
+<view class="container">
+  <view style="width:100%;position: relative;">
+
+    <view class="search_bar">
+      <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+          <view class="weui-search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}"
+                   focus="{{inputShowed}}" bindinput="inputTyping"/>
+            <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+              <icon type="clear" size="14"></icon>
+            </view>
+          </view>
+          <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+            <icon class="weui-icon-search" type="search" size="14"></icon>
+            <view class="weui-search-bar__text">搜索</view>
+          </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="wxSearchFn">搜索</view>
+      </view>
+
+    </view>
+
+
+    <!-- 搜索框 开始 -->
+    <!-- <view class="weui-search-bar search_bar">
+     <view class="weui-search-bar__form" style='background:none;border:none;'>
+      <view class="weui-search-bar__box">
+       <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="weui-search-bar__input" placeholder="搜索" placeholder-class='search_input' value="{{inputVal}}" bindinput="wxSearchInput" />
+
+      </view>
+        <view bindtap="clearCInput" class="weui-icon-clear {{inputVal.length > 0 ? 'banner_show':'banner_hide'}}">
+       <icon type="clear" size="14"></icon>
+       </view>
+     <view class="sbtn {{inputVal.length > 0 ? 'banner_show':'banner_hide'}}">
+        <button class="wxSearch-button" bindtap="wxSearchFn" size="mini" plain="true">搜索</button>
+       </view>
+     </view>
+    </view> -->
+    <!-- 搜索框 结束 -->
+
+
+    <swiper class="banner {{bannser_show?'banner_show':'banner_hide'}}" indicator-dots="{{indicatorDots}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{banners}}" wx:key="unique">
+        <template is="temp_banner" data="{{item}}"/>
+      </block>
+    </swiper>
+
+
+  </view>
+
+
+  <!--不分页-->
+  <!--<block wx:if="{{menu_type.indexmtype_isopen=='0'}}">-->
+  <view class="menu_list" style="margin:10rpx 0px!important;">
+    <view wx:for="{{menu_list}}" wx:key="unique" class="menu_icon" bindtap="open_mlist" data-menu_id="{{item.menu_id}}"
+          data-menu_name="{{item.menu_name}}">
+      <image src="{{item.img}}"></image>
+      <view class="menu_text">{{item.tname}}</view>
+    </view>
+  </view>
+  <!--</block>-->
+
+  <!--分页分类组-->
+  <!--<block wx:if="{{menu_type.indexmtype_isopen=='1'}}">-->
+  <!--<swiper class="menu_list" style="margin:10rpx 0px!important;" indicator-dots="{{menu_type.mtype_fy_isdots}}" duration="{{duration}}">-->
+  <!--<block wx:for="{{menu_list}}" wx:key="unique" >-->
+  <!--<swiper-item>-->
+  <!--<view class="menu_list" >-->
+  <!--<view wx:for="{{item.page_data}}" wx:key="unique" class="menu_icon" bindtap="open_mlist" data-tid="{{item.id}}" data-tname="{{item.tname}}" data-is_parent_open="{{item.is_parent_open}}" data-parent_types="{{item.parent_types}}" data-type="{{item.type}}" data-rd_wx_appid="{{item.rd_wx_appid}}" data-rd_wx_path="{{item.rd_wx_path}}" data-rd_wx_extradata="{{item.rd_wx_extradata}}" data-rd_wx_envversion="{{item.rd_wx_envversion}}" data-rd_tw_title="{{item.rd_tw_title}}">-->
+  <!--<image src="{{item.img}}"></image>-->
+  <!--<view class="menu_text">{{item.tname}}</view>-->
+  <!--</view>-->
+  <!--</view>-->
+  <!--</swiper-item>-->
+
+  <!--</block>-->
+
+  <!--</swiper> -->
+  <!--</block>-->
+
+  <!--<include src="../../../we7/resource/plugin/marquee/marquee.wxml" />-->
+
+  <!--<swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="3000" wx:if="{{run_pmd_isopen=='1'}}">-->
+  <!--<view class="ico_laba">-->
+  <!--<image src="../../resource/images/static/laba.png"/>-->
+  <!--</view>-->
+  <!--<block wx:for="{{pmdList}}" wx:key="unique">-->
+  <!--<swiper-item >-->
+  <!--<view class="swiper_item">-->
+
+  <!--<text style='font-size:{{item.fontsize}}rpx'>{{item.title}}</text>-->
+  <!--</view>-->
+  <!--</swiper-item>-->
+  <!--</block>-->
+  <!--</swiper>-->
+
+
+  <!-- <block wx:if="{{run_pmd_isopen=='1'}}">
+  <view class="marquee">
+  <view class="ico_laba">
+  <image src="../../resource/images/static/laba.png"/>
+  </view>
+      <view class="content">
+          <text>{{pmd_text}}</text> <text style="display: inline-block; width: 5em;"></text>
+          <text>{{pmd_text}}</text> <text style="display: inline-block; width: 5em;"></text>
+          <text wx:if="{{pmd_text_length<60}}">{{pmd_text}}</text> <text style="display: inline-block; width: 5em;"></text>
+      </view>
+  </view>
+  </block>  -->
+
+
+  <view wx:if="{{currentTabmenu=='1'}}" class="nav bc_white">
+    <view class="{{currentTab==0 ? 'tab_selectedtab' : 'tab_default'}}" data-current="0" bindtap="swichNav">
+      <text>最新发布</text>
+    </view>
+    <!--<view class="{{currentTab==1 ? 'tab_selectedtab' : 'tab_default'}}" data-current="1" bindtap="swichNav">-->
+    <!--<text>距离最近</text>-->
+    <!--</view>-->
+    <!-- <view class="{{currentTab==2 ? 'tab_selectedtab' : 'tab_default'}}" data-current="2" bindtap="swichNav">置顶消息</view> -->
+  </view>
+
+
+  <view class="{{currentTab==0 ? 'tab_show' : 'tab_hidden'}}" id="msg_list_0">
+
+
+    <block wx:for="{{m_list_0}}" wx:key="unique" wx:for-index="idx">
+      <template is="msg_template" data="{{item,idx}}"/>
+    </block>
+
+    <block wx:if="{{m_list_0_last}}">
+      <template is="lastdata"/>
+    </block>
+
+  </view>
+
+  <!--<view class="{{currentTab==1 ? 'tab_show' : 'tab_hidden'}}" id="msg_list_1">-->
+  <!--<block wx:for="{{m_list_1}}" wx:key="unique" wx:for-index="idx">-->
+  <!--<template is="msg_template" data="{{item,idx}}"/>-->
+  <!--</block>-->
+  <!--<block wx:if="{{m_list_1_last}}">-->
+  <!--<template is="lastdata"/>-->
+  <!--</block>-->
+  <!--</view>-->
+
+  <!--<view class="{{currentTab==2 ? 'tab_show' : 'tab_hidden'}}" id="msg_list_2">-->
+  <!--<block wx:for="{{m_list_2}}" wx:key="unique" wx:for-index="idx">-->
+  <!--<template is="msg_template" data="{{item,idx}}"/>-->
+  <!--</block>-->
+  <!--<block wx:if="{{m_list_2_last}}">-->
+  <!--<template is="lastdata"/>-->
+  <!--</block>-->
+  <!--</view>-->
+
+</view>
+
+
+<!--
+<view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">最新发布{{winHeight}}</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">距离最近</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">置顶消息</view>
+</view>
+
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px;border:1px solid red;" bindchange="bindChange">
+<swiper-item>
+      <view>我是哈哈</view>
+       <view>我是哈哈</view>
+    </swiper-item>
+
+    <swiper-item>
+      <view>我是呵呵</view>
+    </swiper-item>
+
+    <swiper-item>
+      <view>我是嘿嘿</view>
+    </swiper-item>
+</swiper>
+
+
+<!--
+<view class="textContainer">
+    <text class="textStyle">{{text}}</text>
+  </view>
+-->
+
+<!--
+<view class="nav">
+		<block wx:for="{{navs}}" wx:key="{{index}}" >
+		<navigator class="nav-item {{(index + 1) % 3 == 0 ? 'nav-item-no-border' : ''}}"  url="{{item.url}}" hover-class="navigator-hover">
+			<image class="nav-icon" src="{{item.icon}}" />
+			<view class="nav-title">{{item.name}}</view>
+		</navigator>
+		</block>
+	</view>
+-->
+
+
+<!--评论-->
+<!--<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+  <form bindsubmit="formSubmit_send_comments" report-submit="true">
+    <input type="text" value="{{pl_mid}}" name="pl_mid" style="display:none;"/>
+    <input type="text" value="{{pl_ctype}}" name="pl_ctype" style="display:none;"/>
+    <input type="text" value="{{attr}}" name="attr" style="display:none;"/>
+    <input type="text" value="{{attrtp}}" name="attrtp" style="display:none;"/>
+    <input type="text" value="{{plid}}" name="plid" style="display:none;"/>
+
+    &lt;!&ndash; <input type="text" value="{{openId}}" name="u_openid" style="display:none;" />
+    <input type="text" value="{{ubinfo.nickName}}" name="u_nickname" style="display:none;" />
+    <input type="text" value="{{ubinfo.city}}" name="u_city" style="display:none;" />
+    <input type="text" value="{{ubinfo.avatarUrl}}" name="u_avatarurl" style="display:none;" /> &ndash;&gt;
+
+    <view class="classname" style="display:flex;padding:10rpx 30rpx 30rpx 30rpx;">
+      <view class="classname" style="width:85%;margin-right:20rpx;">
+        <input type="text" name="pl_content" placeholder="评论{{plname}}"
+               style="border-bottom: 3rpx solid #1AAD16;width:100%;height:70rpx;"/>
+      </view>
+
+      <view class="classname" style="width:15%;">
+        <button formType="submit" type="primary" size="mini" bindtap="send_comments"
+                style="padding:4rpx 20rpx;width:100%;">发送
+        </button>
+      </view>
+    </view>
+  </form>
+</view>-->
+<!--评论 结束-->
+
+
+<!-- <import src="../../resource/templates/myfooter.wxml"/>
+<template is="myfooterWx" data="{{...tabBar}}"/>
+ -->
+<import src="/we7/pages/templates/footer.wxml"/>
+<template is="footerWx" data="{{...tabBar}}"/>
+
+<!--mask-->
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" data-mtype="menu"
+      wx:if="{{showModalStatus_sheet}}"></view>
+<!--使用animation属性指定需要执行的动画-->
+<scroll-view scroll-y="true" animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus_sheet}}">
+  <!--drawer content-->
+  <view class="drawer_title" wx:for="{{mtype_list}}" wx:key="unique" bindtap="tap_add_sheet" data-tid="{{tid}}"
+        data-tname="{{tname}}" data-pid="{{item.id}}" data-pname="{{item.tname}}" data-type="{{item.type}}"
+        data-rd_wx_appid="{{item.rd_wx_appid}}" data-rd_wx_path="{{item.rd_wx_path}}"
+        data-rd_wx_extradata="{{item.rd_wx_extradata}}" data-rd_wx_envversion="{{item.rd_wx_envversion}}"
+        data-rd_tw_title="{{item.rd_tw_title}}">{{item.tname}}
+  </view>
+  <view class="btn_ok" bindtap="powerDrawer" data-statu="close" data-mtype="menu">关闭</view>
+</scroll-view>
+
+
+<import src="../../resource/templates/win_shang.wxml"/>
+<template is="win_shang"
+          data="{{animationData,showModalStatus_shang,shmoney,shmoney_choonse,clear_inshmoney,shang_mid,shang_idx}}"/>
+
+
+<import src="../../resource/templates/tmpl_gotop.wxml"/>
+<template is="gotop" data="{{to_top_status}}"/>

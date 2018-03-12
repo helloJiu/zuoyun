@@ -1,0 +1,195 @@
+<template name="lastdata">
+<view style="border-top:1px solid #b3b3b3;margin-top:60rpx;text-align:center;width:520rpx;margin-left:auto;margin-right:auto;">
+ <text style='color:#b3b3b3;font-size:32rpx;padding:10rpx;background:#e6e1e1;position:relative;bottom:30rpx;'>没有更多了</text>
+ </view>
+</template>
+
+<template name="msg_audit_template">
+<!--消息开始-->
+  <view class="msg_container" >
+<view class="classname">
+
+
+
+<view class="msg_user" bindtap="nav_msg_info" data-mid="{{item.id}}">
+  <image src="{{item.u_avatarurl}}"/></view>
+</view>
+  
+  <view class="msg_conent" >
+
+
+
+
+
+
+<view wx:if="{{item.audit_status==0}}" class="payinfo">
+
+
+
+
+<text wx:if="{{item.audit_status==0}}" class="t_red">未审核</text>
+<text class="t_red" wx:if="{{item.total_money>0 && item.payStatus=='0'}}">总需支付￥：{{item.total_money}}元</text>
+<block wx:if="{{item.total_money>0 && item.payStatus=='0'}}">
+<button class="paybtn" size="mini" type="primary" style="background:#F00000" bindtap="paymoney" data-idx="{{idx}}" data-tid="{{item.tid}}" data-is_placed_top="{{item.is_placed_top}}" data-money="{{item.total_money}}" data-oncode="{{item.oncode}}">费用支付</button>
+</block>
+
+</view>
+
+<view wx:elif="{{item.audit_status==-1}}" class="payinfo">
+<text class="t_red">下架</text>
+<text class="t_red">下架原由:{{item.audit_desc}}</text>
+</view>
+
+<view wx:elif="{{item.audit_status==-2}}" class="payinfo">
+<text class="t_red">因实名下架</text>
+<text class="t_red">下架原由:{{item.audit_desc}}</text>
+</view>
+
+<view wx:else class="payinfo">
+<text class="t_green">已发布 </text>
+<text class="t_green" wx:if="{{item.total_money>0}}">￥：{{item.total_money}}元</text>
+</view>
+
+<view wx:if="{{item.is_placed_top==1}}" class="payinfo">
+<text class="t_red">置顶{{item.placed_top_days}}天</text>
+<text class="t_red">费用:{{item.placed_top_money}}元</text>
+<text class="t_red" wx:if="{{item.placed_top_duedate}}">截止:{{item.placed_top_duedate}}</text>
+</view>
+
+
+
+<view>
+
+<button class="paybtn" size="mini" type="primary" style="background:#FF0033;" bindtap="tap_del_msg" data-mid="{{item.id}}" data-idx="{{idx}}">删除</button>
+
+<button class="paybtn" size="mini" type="primary" style="background:#333399;" bindtap="tap_refresh_msg" data-mid="{{item.id}}" data-idx="{{idx}}" data-oncode="{{item.oncode}}">刷新消息日期</button>
+
+<button class="paybtn" size="mini" type="primary" style="background:#FF6600;" bindtap="tapmsg_top" data-idx="{{idx}}"  data-mid="{{item.id}}" data-oncode="{{item.oncode}}" data-tid="{{item.tid}}" data-defaultmoney="{{item.default_money}}" data-payStatus='{{item.payStatus}}' wx:if="{{item.is_placed_top==0 && item.is_top==1  && (item.audit_status==1 || item.audit_status==0) }}">置顶操作</button>
+
+<button class="paybtn" size="mini" type="primary" bindtap="tapbanner" data-idx="{{idx}}"  data-mid="{{item.id}}" data-tid="{{item.tid}}" data-content="{{item.content}}" data-oncode="{{item.oncode}}" wx:if="{{item.audit_status==1 && item.banner_sale==0}}">租广告位</button>
+
+
+<!-- <view  class="payinfo">
+<text class="t_red">幻灯片广告位</text>
+
+</view> -->
+
+
+<!-- <text class="msg_conent_tag_del" >删除该信息</text>
+<text class="msg_conent_tag_del bg_green" >刷新消息日期</text> -->
+
+
+</view>
+
+
+
+
+
+
+
+  <view class="msg_content_top" bindtap="nav_msg_info" data-mid="{{item.id}}">  
+  <view class="msg_conent_name">{{item.u_nickname}}</view>
+  
+  <view class="msg_conent_tag">
+  <text class="msg_conent_tag_base">
+  
+<block wx:if="{{item.mtypshow_isopen==1}}">
+  <text>{{item.tname}}</text> <text wx:if="{{item.parent_tname}}">-{{item.parent_tname}}</text>
+  </block>
+  <block wx:else>   
+   <block wx:if="{{item.parent_tname}}">{{item.parent_tname}}</block>
+   <block wx:else="{{item.parent_tname}}"><text>{{item.tname}}</text></block>
+  </block>
+
+  </text>
+  <text wx:if="{{item.is_placed_top=='1'}}" class="msg_conent_tag_top">置顶</text>
+  </view>
+
+  </view>
+
+<view class="msg_conent_text hiddentext6" bindtap="nav_msg_info" data-mid="{{item.id}}">{{item.content}}</view>
+<view class="msg_conent_img">
+<!--图片集合展示-->
+<block wx:for="{{item.imgs_lists}}" wx:for-item="itemimg" wx:key="unique" >
+<view  wx:if="{{itemimg!=''}}" class="msg_icon" >
+<image src="{{itemimg}}" data-img="{{itemimg}}" data-imgs="{{item.imgs_lists}}" bindtap="previewImage"/>
+</view>
+</block>
+<!--图片集合展示 结束-->
+</view>
+
+<view class="msg_conent_gps">
+<image src="../../resource/images/static/menu_6.png"/>
+{{item.loc_address}}
+</view>
+
+
+
+
+
+
+<!--底部信息-->
+ <view class="msg_content_top nopadding">  
+  <view class="msg_conent_time">{{item.crtime}}</view>
+  
+  <view class="msg_conent_tag_bottom" >  
+ 
+ <view wx:if="{{item.lookcnt_isopen==1}}" class="msg_conent_tag_bottom_icon">
+   <image src="../../resource/images/static/look.png"/>
+   <text class="msg_conent_tag_default">{{item.look_cnt}}</text>
+  </view>
+ 
+  
+<view wx:if="{{item.goods_isopen=='1'}}" class="msg_conent_tag_bottom_icon">
+<block wx:if="{{item.isgoods=='1'}}">
+<image src="../../resource/images/static/like_ok.png" bindtap="ck_goods" data-mid="{{item.id}}" data-idx="{{idx}}"/>
+</block>
+<block wx:else>
+<image src="../../resource/images/static/like_default.png" bindtap="ck_goods" data-mid="{{item.id}}" data-idx="{{idx}}"/>
+</block>
+ <text class="msg_conent_tag_default">{{item.goods_cnt}}</text>
+</view>
+
+  
+  <view wx:if="{{item.scomments_isopen=='1'}}" class="msg_conent_tag_bottom_icon">
+   <image src="../../resource/images/static/comments.png" data-idx="{{idx}}" data-mid="{{item.id}}" data-plname="{{item.u_nickname}}" data-attr="0" data-ctype="main" bindtap="show_comments"/>
+   <text class="msg_conent_tag_default">{{item.comments_cnt}}</text>
+  </view>
+
+
+
+
+ 
+
+  </view>
+
+ </view>
+
+
+
+
+ <!--底部信息结束-->
+<!--评论开始-->
+<!--
+<view class="cmmts">
+<view wx:for="{{item.comments}}" wx:for-item="ctmain" class="cmt_main">
+<text class="plname" data-idx="{{idx}}" data-mid="{{item.id}}" data-plname="{{ctmain.u_nickname}}" data-attr="{{ctmain.id}}" data-attrtp="" data-ctype="ptmain" bindtap="show_comments">{{ctmain.u_nickname}}</text>
+<text class="ptext">:{{ctmain.mcontent}}</text>
+
+<view wx:for="{{ctmain.pt_comments}}" wx:for-item="ptmain" class="cmt_parmain">
+<text class="plhf plname" data-idx="{{idx}}" data-mid="{{item.id}}" data-plname="{{ptmain.u_nickname}}" data-attr="{{ctmain.id}}" data-attrtp="u" data-plid="{{ptmain.id}}" data-ctype="ptmain" bindtap="show_comments">{{ptmain.u_nickname}}:</text>
+<text>回复:</text>
+<text class="plname" data-idx="{{idx}}" data-mid="{{item.id}}" data-plname="{{ptmain.rp_nickname}}" data-attr="{{ctmain.id}}" data-attrtp="rp" data-plid="{{ptmain.id}}" data-ctype="ptmain" bindtap="show_comments">{{ptmain.rp_nickname}}</text>
+<text class="ptext">:{{ptmain.mcontent}}</text>
+</view>
+</view>
+</view>
+-->
+<!--评论结束-->
+
+
+</view>
+</view>
+ <!--消息结束-->
+
+</template>

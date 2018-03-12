@@ -1,0 +1,6 @@
+<template name="gotop">
+  <view class="go_top" bindtap='tap_gotop' wx:if="{{to_top_status==true}}">
+    <image src="/wys_tongcheng/resource/images/static/arrow-top.png" mode="widthFix"></image>
+    <view class="htitle">顶部</view>
+  </view>
+</template>

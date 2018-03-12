@@ -1,0 +1,38 @@
+<template name="win_shang">
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" data-mtype="shang" wx:if="{{showModalStatus_shang}}"></view>
+<!--使用animation属性指定需要执行的动画-->  
+<scroll-view scroll-y="true" animation="{{animationData}}" class="drawer_box_shang" wx:if="{{showModalStatus_shang}}">
+ <view class="drawer_money">打赏</view>
+  <!--drawer content-->  
+ <view class="view_padding1">
+<view class='drawer_title_two'>请选择打赏金额</view>
+
+<view class='view_shang_money'>
+<text bindtap='tap_choonse_money' data-shmoney='1' class="{{ shmoney=='1' && shmoney_choonse ?'active_text_money':''}}">1元</text>
+<text bindtap='tap_choonse_money' data-shmoney='5' class="{{ shmoney=='5' && shmoney_choonse ?'active_text_money':''}}">5元</text>
+<text bindtap='tap_choonse_money' data-shmoney='10' class="{{shmoney=='10' && shmoney_choonse ?'active_text_money':''}}">10元</text>
+<text bindtap='tap_choonse_money' data-shmoney='50' class="{{shmoney=='50' && shmoney_choonse ?'active_text_money':''}}">50元</text>
+<text bindtap='tap_choonse_money' data-shmoney='100' class="{{shmoney=='100' && shmoney_choonse ?'active_text_money':''}}">100元</text>
+<text bindtap='tap_choonse_money' data-shmoney='200' class="{{shmoney=='200' && shmoney_choonse ?'active_text_money':''}}">200元</text>
+ </view>
+ </view>
+ <form bindsubmit="formSubmit_shange" report-submit='true'>
+ <input type='number' name="shang_mid" value="{{shang_mid}}" style='display:none'/>
+ <input type='number' name="shang_idx" value="{{shang_idx}}" style='display:none'/>
+ <view class="view_shang view_padding1">
+  <view class='drawer_title_two'>土豪请随意</view>
+ 
+ <view class="view_user_input view_padding1">
+ <view class="view_user_input_in"><input type="number" name="shmoney" value="{{clear_inshmoney}}" placeholder="请输入打赏金额,至少为1元" placeholder-class="money_placeholder" bindfocus="clear_shmoney_choonse"></input> </view>
+ <view class="view_user_input_text">元</view>
+ </view>
+
+ <view class="view_padding1" style='padding:20rpx 100rpx;'>
+
+<button formType="submit" type="default" type="primary" size="default" bindtap="default"> 确认支付 </button>
+ </view>
+ </view>
+</form>
+  <!-- <view class="btn_ok" bindtap="powerDrawer" data-statu="close" data-mtype="shang">关闭</view>  -->
+</scroll-view>
+</template>

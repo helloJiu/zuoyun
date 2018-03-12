@@ -1,0 +1,5 @@
+<template name="lastdata">
+<view style="text-align:center;font-size:28rpx;color:gray;">
+ -------没有更多了-------
+ </view>
+</template>

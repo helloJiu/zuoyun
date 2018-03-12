@@ -1,0 +1,27 @@
+<template name="templ_comments_form">
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+<form bindsubmit="formSubmit_send_comments">
+<input type="text" value="{{pl_mid}}" name="pl_mid" style="display:none;" />
+<input type="text" value="{{pl_ctype}}" name="pl_ctype" style="display:none;" />
+<input type="text" value="{{attr}}" name="attr" style="display:none;" />
+<input type="text" value="{{attrtp}}" name="attrtp" style="display:none;" />
+<input type="text" value="{{plid}}" name="plid" style="display:none;" />
+
+<input type="text" value="{{ubinfo.openId}}" name="u_openid" style="display:none;" />
+<input type="text" value="{{ubinfo.nickName}}" name="u_nickname" style="display:none;" />
+<input type="text" value="{{ubinfo.city}}" name="u_city" style="display:none;" />
+<input type="text" value="{{ubinfo.avatarUrl}}" name="u_avatarurl" style="display:none;" />
+
+<view class="classname" style="display:flex;padding:30rpx;">
+<view class="classname" style="width:85%;margin-right:20rpx;">
+<input type="text" name="pl_content" placeholder="评论{{plname}}" style="border-bottom: 3rpx solid #1AAD16;width:100%;"/>
+</view>
+
+<view class="classname" style="width:15%;">
+<button formType="submit" type="primary" size="mini" bindtap="send_comments" style="padding:4rpx 20rpx;width:100%;">发送</button>
+</view>
+</view>
+</form>
+</view>
+</template>

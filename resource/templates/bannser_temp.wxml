@@ -1,0 +1,5 @@
+<template name="temp_banner">
+  <swiper-item>
+    <image src="{{item.img}}" data-bid="{{item.id}}" class="slide-image" bindtap="tapBanner_det"/>
+  </swiper-item>
+</template>

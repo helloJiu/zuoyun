@@ -1,0 +1,56 @@
+ <!-- hover-class="active" -->
+<template name="goHomeSelf">
+  <navigator url="/wys_tongcheng/pages/index/index" open-type="switchTab" class="goHome" >
+    <image src="/wys_tongcheng/resource/images/static/home_white.png" mode="widthFix"></image>
+    <view class="htitle">主页</view>
+  </navigator>
+</template>
+
+
+
+<template name="goHomeSelf_2">
+  <navigator url="/wys_tongcheng/pages/index/index" open-type="redirect" class="goHome goHome2">
+    <image src="/wys_tongcheng/resource/images/static/home_white.png" mode="widthFix"></image>
+    <view class="htitle">主页</view>
+  </navigator>
+</template>
+
+
+<template name="navigateBack">
+  <navigator url="/wys_tongcheng/pages/index/index" open-type="navigateBack" delta="1" class="goHome">
+    <image src="/wys_tongcheng/resource/images/static/back-2.png" mode="widthFix"></image>
+    <view class="htitle">返回</view>
+  </navigator>
+</template>
+
+<template name="navigateBack_top">
+  <navigator url="/wys_tongcheng/pages/index/index" open-type="navigateBack" delta="1" class="goHome goHome_top">
+    <image src="/wys_tongcheng/resource/images/static/back-2.png" mode="widthFix"></image>
+    <view class="htitle">返回</view>
+  </navigator>
+</template>
+
+
+
+<template name="rd_store_list">
+  <navigator url="../store_main/page" open-type="redirect" class="goHome goHome2">
+    <image src="/wys_tongcheng/resource/images/static/home_white.png" mode="widthFix"></image>
+    <view class="htitle">店铺</view>
+  </navigator>
+ 
+  <navigator url="/wys_tongcheng/pages/index/index" open-type="navigateBack" delta="1" class="goHome ">
+    <image src="/wys_tongcheng/resource/images/static/back-2.png" mode="widthFix"></image>
+    <view class="htitle">返回</view>
+  </navigator>
+</template>
+
+
+
+
+<!-- 店铺编辑或增加返回店铺列表 -->
+<template name="redirect_store_list">
+  <navigator url="../store_list_my/page" open-type="redirect" class="goHome">
+    <image src="/wys_tongcheng/resource/images/static/back-2.png" mode="widthFix"></image>
+    <view class="htitle">返回</view>
+  </navigator>
+</template>

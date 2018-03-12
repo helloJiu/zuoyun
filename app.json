@@ -1,0 +1,50 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/send/send_main",
+    "pages/my/my"
+
+  ],
+  "window":{
+    "navigationBarTitleText": "微同城",
+    "navigationBarBackgroundColor": "#ee404a",
+    "navigationBarTextStyle": "#ffffff",
+    "backgroundColor": "#eaeaea",
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "light"
+  },
+  "tabBar":{
+    "list":[
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "resource/images/menu/e7.png",
+        "selectedIconPath": "resource/images/menu/e7_ok.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/send/send_main",
+        "iconPath": "resource/images/menu/e2.png",
+        "selectedIconPath": "resource/images/menu/e2_ok.png",
+        "text": "发布"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "resource/images/menu/e1.png",
+        "selectedIconPath": "resource/images/menu/e1_ok.png",
+        "text": "我的"
+      }
+    ],
+      "backgroundColor": "#F5F5F5",
+      "selectedColor": "#AB956D",
+      "color": "#989898",
+      "borderStyle": "white",
+      "position":"bottom"
+  },
+  "networkTimeout": {
+    "request": 20000,
+    "connectSocket": 20000,
+    "uploadFile": 20000,
+    "downloadFile": 20000
+  },
+  "debug":true
+}

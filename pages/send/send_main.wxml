@@ -1,0 +1,72 @@
+<!-- 发布页 -->
+<!-- <view class="df_df_dfg">
+  <image src="../tc_store/resource/images/fa_banner.jpg"></image>
+</view> -->
+<view class="pd pt20 pm20 bgff" bindtap='tap_store' wx:if="{{store}}">
+  <icon class="f_i dsf_ddinadf fl mt15" />
+  <view class="ov pl20 pr">
+    <view class="dian fz32 z6">
+      我是商家，点击入驻商圈
+    </view>
+    <view class="fz24 z9 mt10">
+      超低成本，本地宣传，简单有效，方便快捷！
+    </view>
+    <icon class="f_i dsf_rightsd" />
+  </view>
+  <view class="qc"></view>
+</view>
+
+<view class="pd pt20 pm20 bgff" bindtap='tap_pinche' wx:if="{{pinche}}">
+  <icon class="f_i dsf_dsdsdf fl mt15" />
+  <view class="ov pl20 pr">
+    <view class="dian fz32 z6">
+      拼车，临时长期拼车
+    </view>
+    <view class="fz24 z9 mt10">
+    本地拼车选择
+    </view>
+    <icon class="f_i dsf_rightsd" />
+  </view>
+  <view class="qc"></view>
+</view>
+
+
+<view class="btm pd pt20 pm20 z9 fz30">
+  请选择同城发布类别
+</view>
+
+
+<view class="menu_list">
+
+<view wx:for="{{menu_list}}" wx:key="id" class="menu_icon" data-tid="{{item.id}}" data-tname="{{item.tname}}" data-is_parent_open="{{item.is_parent_open}}" data-parent_types="{{item.parent_types}}" bindtap="open_mlist">
+<image src="{{item.img}}"></image>
+<view class="menu_text">{{item.tname}}</view>
+</view>
+
+</view>
+
+
+
+
+<!-- 
+<view class="df_d_df_dfg bgff">
+
+  <navigator url="{{item.url}}" class="dsf_df_dfgx cen pt20 pm30" wx:for="{{dsf_df}}">
+    <view class="df_df_dgxc">
+      <icon class="f_i dsf_dfdfdc cz {{item.img}}" />
+    </view>
+    <view class="fz28 z0 mt10">{{item.name}}</view>
+  </navigator>
+
+  <view class="qc"></view>
+
+</view> -->
+
+<!--mask-->  
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus_sheet}}"></view>
+<!--使用animation属性指定需要执行的动画-->  
+<scroll-view scroll-y="true" animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus_sheet}}">   
+  <!--drawer content-->  
+  <view class="drawer_title" wx:for="{{mtype_list}}" wx:key="unique" bindtap="tap_add_sheet" data-tid="{{tid}}" data-tname="{{tname}}" data-pid="{{item.id}}" data-pname="{{item.tname}}" >{{item.tname}}</view>
+  <view class="btn_ok" bindtap="powerDrawer" data-statu="close">关闭</view> 
+</scroll-view>
