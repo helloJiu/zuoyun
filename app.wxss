@@ -9,7 +9,7 @@
   font-family: "PingFang SC", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Microsoft Yahei", ΢���ź�, STHeiti, ����ϸ��, sans-serif;
 }
 
-@import 'we7/resource/style/weui.wxss';
+@import '/resource/style/weui.wxss';
 
 
 @font-face {font-family: "iconfont";

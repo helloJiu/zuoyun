@@ -1,31 +1,31 @@
 /**
  * Created by jimmy-jiang on 2016/11/21.
  */
-import { Token } from 'token.js';
-import { Config } from 'config.js';
+import {Token} from 'token.js';
+import {Config} from 'config.js';
 
 class Base {
     constructor() {
         "use strict";
         this.baseRestUrl = Config.restUrl;
-        this.onPay=Config.onPay;
+        this.onPay = Config.onPay;
     }
 
     //http 请求类, 当noRefech为true时，不做未授权重试机制
     request(params, noRefetch) {
         var that = this,
-            url=this.baseRestUrl + params.url;
-        if(!params.type){
-            params.type='get';
+            url = this.baseRestUrl + params.url;
+        if (!params.type) {
+            params.type = 'get';
         }
         /*不需要再次组装地址*/
-        if(params.setUpUrl==false){
+        if (params.setUpUrl == false) {
             url = params.url;
         }
         wx.request({
             url: url,
             data: params.data,
-            method:params.type,
+            method: params.type,
             header: {
                 'content-type': 'application/json',
                 'token': wx.getStorageSync('token')
@@ -56,7 +56,7 @@ class Base {
         });
     }
 
-    _processError(err){
+    _processError(err) {
         console.log(err);
     }
 
@@ -72,6 +72,59 @@ class Base {
         return event.currentTarget.dataset[key];
     };
 
-};
+    getUserInfo() {
+        var that = this;
+
+        wx.login({
+            success: function (res) {
+                if (res.code) {
+                    wx.getUserInfo({
+                        success: function (data) {
+
+                            // that.getUserInfo_det(res.code);
+                        }, fail: function () {
+                            wx.showModal({
+                                title: '提示',
+                                content: '授权获取用户信息失败,将不可发布消息和评论!',
+                                confirmText: '去设置',
+                                success: function (mres) {
+                                    if (mres.confirm) {
+                                        wx.openSetting({
+                                            success: function (pdata) {
+                                                if (pdata) {
+                                                    if (pdata.authSetting["scope.userInfo"] == true) {
+                                                        console.log('取得用户信息授权成功');
+
+                                                        wx.login({
+                                                            success: function (twores) {
+                                                                if (twores.code) {
+                                                                    // that.getUserInfo_det(twores.code);
+                                                                }
+                                                            }
+                                                        });
+
+
+                                                    } else {
+                                                        that.getUserInfo();
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        that.getUserInfo();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
+
+
+    }
+
+}
+;
 
 export {Base};

@@ -2,18 +2,11 @@ var app = getApp();
 var page_0 = 1;
 var page_1 = 1;
 var page_2 = 1;
-//var md5 = require('../../../we7/resource/js/md5.js');
+
 var userinfoUtil = require('../../resource/js/userinfoUtil.js');
-//var WxNotificationCenter = require("../../../we7/resource/plugin/WxNotificationCenter/WxNotificationCenter.js");
+
 Page({
     data: {
-        // pmdList: [
-        //   {title: "公告：多地首套房贷利率上浮 热点城市渐迎零折扣时代AAAAAAAAAAAAAAAAAAAAB" }
-        //  ],
-        // marquee: {
-        //   width: 1,
-        //   text: '一条会滚动的文字滚来滚去的文字跑马灯，哈哈哈哈哈哈哈哈这是'
-        // },
         scrollTop: 0,
         shmoney: '',
         shmoney_choonse: false,//打赏金额选择
